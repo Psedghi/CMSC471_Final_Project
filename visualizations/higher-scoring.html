@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Higher Scoring | Evolution of Basketball</title>
   <link rel="stylesheet" href="../styles/main.css">
+  <link rel="stylesheet" href="../styles/higher-scoring.css">
 </head>
 <body>
   <header class="site-header">
@@ -21,19 +22,55 @@
       <p data-viz-description></p>
     </section>
 
-    <section class="viz-layout">
-      <div class="viz-stage">
-        <div class="placeholder-chart" data-viz-chart></div>
-      </div>
+    <section class="viz-layout scoring-layout">
+      <div class="viz-stage scoring-stage">
+        <div class="score-story" data-score-story></div>
 
-      <aside class="data-panel" aria-label="Planned data sources">
-        <h2>Data</h2>
-        <ul class="data-list" data-viz-data></ul>
-      </aside>
+        <section class="chart-panel" aria-label="Interactive scoring chart">
+          <div class="chart-toolbar">
+            <div>
+              <p class="eyebrow">Explore the trend</p>
+              <h2 data-metric-name>Points per team game</h2>
+              <p class="metric-readout" data-metric-readout></p>
+            </div>
+
+            <div class="metric-controls" role="tablist" aria-label="Scoring metric">
+              <button class="metric-button is-active" type="button" data-metric="PTS_PER_TEAM_GAME">Points</button>
+              <button class="metric-button" type="button" data-metric="OFF_RATING">Offense</button>
+              <button class="metric-button" type="button" data-metric="PACE">Pace</button>
+              <button class="metric-button" type="button" data-metric="FG3A_PER_TEAM_GAME">3PA</button>
+              <button class="metric-button" type="button" data-metric="TS_PCT">True Shooting</button>
+            </div>
+          </div>
+
+          <div class="chart-wrap">
+            <svg class="line-chart" data-scoring-chart viewBox="0 0 860 430" role="img" aria-labelledby="scoring-chart-title scoring-chart-desc">
+              <title id="scoring-chart-title">NBA higher scoring trend chart</title>
+              <desc id="scoring-chart-desc">Line chart showing league-wide team scoring metrics by season.</desc>
+            </svg>
+            <div class="chart-tooltip" data-chart-tooltip hidden></div>
+          </div>
+        </section>
+
+        <section class="scoring-context" aria-label="Scoring context">
+          <div>
+            <p class="eyebrow">Then vs now</p>
+            <h2>What is driving the scoring jump?</h2>
+            <div class="driver-list" data-driver-list></div>
+          </div>
+
+          <div>
+            <p class="eyebrow">Season markers</p>
+            <h2>Where the trend changes</h2>
+            <div class="moment-list" data-moment-list></div>
+          </div>
+        </section>
+      </div>
     </section>
   </main>
 
   <script src="../scripts/viz-page.js"></script>
+  <script src="../scripts/higher-scoring-data.js"></script>
   <script src="../scripts/higher-scoring.js"></script>
 </body>
 </html>

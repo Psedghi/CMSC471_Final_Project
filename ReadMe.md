@@ -25,9 +25,11 @@ The baseline web structure gives each visualization its own page and browser scr
 .
 ├── index.html
 ├── styles/
-│   └── main.css
+│   ├── main.css
+│   └── higher-scoring.css
 ├── scripts/
 │   ├── viz-page.js
+│   ├── higher-scoring-data.js
 │   ├── three-point-boom.js
 │   ├── shooting-centers.js
 │   ├── higher-scoring.js
@@ -44,9 +46,15 @@ The baseline web structure gives each visualization its own page and browser scr
 └── data/
     ├── readme.md
     ├── center_3s.py
+    ├── higher_scoring.py
+    ├── global_superstars.py
     ├── center_threes_all.csv
     ├── center_threes_season_agg.csv
-    └── center_threes_top5.csv
+    ├── center_threes_top5.csv
+    ├── higher_scoring_team_stats.csv
+    ├── higher_scoring_season_summary.csv
+    ├── international_players.csv
+    └── international_season_summary.csv
 ```
 
 `index.html` is the project hub. Each file in `visualizations/` owns one visualization page, and each matching file in `scripts/` owns the JavaScript for that page. Shared page setup lives in `scripts/viz-page.js`; shared styling lives in `styles/main.css`.
