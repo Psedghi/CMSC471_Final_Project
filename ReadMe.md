@@ -18,3 +18,35 @@ Our project breaks down the biggest shifts in the sport:
 - [**NBA API**](https://github.com/swar/nba_api): Our main source for official, highly detailed league data and shot charts.
 - [**Basketball Reference**](https://www.basketball-reference.com/): Our backup source for pulling historical stats and cross-referencing.
 
+## Project Structure
+The baseline web structure gives each visualization its own page and browser script.
+
+```text
+.
+├── index.html
+├── styles/
+│   └── main.css
+├── scripts/
+│   ├── viz-page.js
+│   ├── three-point-boom.js
+│   ├── shooting-centers.js
+│   ├── higher-scoring.js
+│   ├── player-size.js
+│   ├── global-superstars.js
+│   └── load-management.js
+├── visualizations/
+│   ├── three-point-boom.html
+│   ├── shooting-centers.html
+│   ├── higher-scoring.html
+│   ├── player-size.html
+│   ├── global-superstars.html
+│   └── load-management.html
+└── data/
+    ├── readme.md
+    ├── center_3s.py
+    ├── center_threes_all.csv
+    ├── center_threes_season_agg.csv
+    └── center_threes_top5.csv
+```
+
+`index.html` is the project hub. Each file in `visualizations/` owns one visualization page, and each matching file in `scripts/` owns the JavaScript for that page. Shared page setup lives in `scripts/viz-page.js`; shared styling lives in `styles/main.css`.

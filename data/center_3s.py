@@ -4,17 +4,17 @@ Pulls center 3-point stats for the past 20 seasons and identifies
 the top 5 shooting centers (by 3PM) each season.
 """
 
+from pathlib import Path
 import time
-import json
 import pandas as pd
 from nba_api.stats.endpoints import leaguedashplayerstats
-from nba_api.stats.static import players
 
 # ── Config ────────────────────────────────────────────────────────────────────
 START_YEAR = 2004          # 2004-05 season  →  20 seasons through 2024-25
 END_YEAR   = 2024
 TOP_N      = 5             # top N centers per season
 DELAY      = 1.0           # seconds between API calls (respect rate limits)
+OUTPUT_DIR = Path(__file__).resolve().parent
 
 # ── Helpers ───────────────────────────────────────────────────────────────────
 
@@ -95,10 +95,11 @@ def main():
         top5_flat.extend(season_list)
     top5_df = pd.DataFrame(top5_flat)
 
-    # Save outputs
-    master_df.to_csv("center_threes_all.csv", index=False)
-    season_agg.to_csv("center_threes_season_agg.csv", index=False)
-    top5_df.to_csv("center_threes_top5.csv", index=False)
+    # Save outputs next to this script so paths stay stable from any cwd.
+    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+    master_df.to_csv(OUTPUT_DIR / "center_threes_all.csv", index=False)
+    season_agg.to_csv(OUTPUT_DIR / "center_threes_season_agg.csv", index=False)
+    top5_df.to_csv(OUTPUT_DIR / "center_threes_top5.csv", index=False)
 
     # Pretty-print summary
     print("\n" + "=" * 60)
@@ -117,9 +118,9 @@ def main():
         print(block[["PLAYER_NAME", "FG3M", "FG3A", "FG3_PCT", "GP"]].to_string(index=False))
 
     print("\n\nFiles saved:")
-    print("  center_threes_all.csv        — every center, every season")
-    print("  center_threes_season_agg.csv — league-wide center 3PT totals per season")
-    print("  center_threes_top5.csv       — top 5 centers by FG3M per season")
+    print(f"  {OUTPUT_DIR / 'center_threes_all.csv'}        — every center, every season")
+    print(f"  {OUTPUT_DIR / 'center_threes_season_agg.csv'} — league-wide center 3PT totals per season")
+    print(f"  {OUTPUT_DIR / 'center_threes_top5.csv'}       — top 5 centers by FG3M per season")
 
 
 if __name__ == "__main__":
