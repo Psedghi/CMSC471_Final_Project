@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>The 3-Point Boom | Evolution of Basketball</title>
   <link rel="stylesheet" href="../styles/main.css">
+  <link rel="stylesheet" href="../styles/three-point-boom.css">
 </head>
 <body>
   <header class="site-header">
@@ -17,23 +18,57 @@
   <main class="viz-shell">
     <section class="viz-heading">
       <p class="eyebrow">Visualization 01</p>
-      <h1 data-viz-title>The 3-Point Boom</h1>
-      <p data-viz-description></p>
+      <h1>The 3-Point Boom</h1>
+      <p>Drag the slider to explore how shot selection shifted from 2003 to 2025. Watch mid-range shots disappear and the three-point line light up.</p>
     </section>
 
-    <section class="viz-layout">
-      <div class="viz-stage">
-        <div class="placeholder-chart" data-viz-chart></div>
+    <div id="heatmap-container">
+      <div class="controls">
+        <div class="season-label">—</div>
+        <div class="slider-row">
+          <span>2003–04</span>
+          <input type="range" id="season-slider">
+          <span>2024–25</span>
+        </div>
+        <div class="toggle-row">
+          <button class="toggle-btn active" data-mode="all">All Shots</button>
+          <button class="toggle-btn" data-mode="3pt">3PT Only</button>
+          <button class="toggle-btn" data-mode="2pt">2PT Only</button>
+        </div>
       </div>
 
-      <aside class="data-panel" aria-label="Planned data sources">
-        <h2>Data</h2>
-        <ul class="data-list" data-viz-data></ul>
-      </aside>
-    </section>
+      <div class="stats-bar">
+        <div class="stat-item">
+          <div class="stat-value" id="stat-total">—</div>
+          <div class="stat-label">Total Shots</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value" id="stat-3pt">—</div>
+          <div class="stat-label">3PT Attempt Rate</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value" id="stat-dist">—</div>
+          <div class="stat-label">Avg Shot Distance</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value" id="stat-fg">—</div>
+          <div class="stat-label">FG%</div>
+        </div>
+      </div>
+
+      <svg id="court-svg"></svg>
+
+      <div class="legend">
+        <span>Low frequency</span>
+        <div class="legend-gradient"></div>
+        <span>High frequency</span>
+      </div>
+    </div>
   </main>
 
-  <script src="../scripts/viz-page.js"></script>
+  <div class="tooltip" id="tooltip"></div>
+
+  <script src="https://d3js.org/d3.v7.min.js"></script>
   <script src="../scripts/three-point-boom.js"></script>
 </body>
 </html>
