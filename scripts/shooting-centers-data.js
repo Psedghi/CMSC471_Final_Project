@@ -1,0 +1,41 @@
+window.SHOOTING_CENTERS_DATA = [
+  { SEASON: "2004-05", total_centers: 118, total_fg3m: 280, total_fg3a: 936,  avg_fg3m: 2.37,  fg3_pct: 0.299 },
+  { SEASON: "2005-06", total_centers: 107, total_fg3m: 185, total_fg3a: 646,  avg_fg3m: 1.73,  fg3_pct: 0.286 },
+  { SEASON: "2006-07", total_centers: 109, total_fg3m: 499, total_fg3a: 1446, avg_fg3m: 4.58,  fg3_pct: 0.345 },
+  { SEASON: "2007-08", total_centers: 118, total_fg3m: 745, total_fg3a: 2231, avg_fg3m: 6.31,  fg3_pct: 0.334 },
+  { SEASON: "2008-09", total_centers: 116, total_fg3m: 868, total_fg3a: 2271, avg_fg3m: 7.48,  fg3_pct: 0.382 },
+  { SEASON: "2009-10", total_centers: 109, total_fg3m: 863, total_fg3a: 2503, avg_fg3m: 7.92,  fg3_pct: 0.345 },
+  { SEASON: "2010-11", total_centers: 103, total_fg3m: 553, total_fg3a: 1512, avg_fg3m: 5.37,  fg3_pct: 0.366 },
+  { SEASON: "2011-12", total_centers: 120, total_fg3m: 521, total_fg3a: 1606, avg_fg3m: 4.34,  fg3_pct: 0.324 },
+  { SEASON: "2012-13", total_centers: 112, total_fg3m: 438, total_fg3a: 1459, avg_fg3m: 3.91,  fg3_pct: 0.300 },
+  { SEASON: "2013-14", total_centers: 114, total_fg3m: 942, total_fg3a: 2803, avg_fg3m: 8.26,  fg3_pct: 0.336 },
+  { SEASON: "2014-15", total_centers: 113, total_fg3m: 581, total_fg3a: 1807, avg_fg3m: 5.14,  fg3_pct: 0.321 },
+  { SEASON: "2015-16", total_centers: 108, total_fg3m: 831, total_fg3a: 2519, avg_fg3m: 7.69,  fg3_pct: 0.330 },
+  { SEASON: "2016-17", total_centers: 101, total_fg3m: 1494, total_fg3a: 4338, avg_fg3m: 14.79, fg3_pct: 0.344 },
+  { SEASON: "2017-18", total_centers: 118, total_fg3m: 2263, total_fg3a: 6400, avg_fg3m: 19.18, fg3_pct: 0.354 },
+  { SEASON: "2018-19", total_centers: 100, total_fg3m: 1992, total_fg3a: 5928, avg_fg3m: 19.92, fg3_pct: 0.336 },
+  { SEASON: "2019-20", total_centers: 103, total_fg3m: 2469, total_fg3a: 7273, avg_fg3m: 23.97, fg3_pct: 0.340 },
+  { SEASON: "2020-21", total_centers: 111, total_fg3m: 2608, total_fg3a: 7445, avg_fg3m: 23.50, fg3_pct: 0.350 },
+  { SEASON: "2021-22", total_centers: 112, total_fg3m: 2690, total_fg3a: 8009, avg_fg3m: 24.02, fg3_pct: 0.336 },
+  { SEASON: "2022-23", total_centers: 105, total_fg3m: 2965, total_fg3a: 8542, avg_fg3m: 28.24, fg3_pct: 0.347 },
+  { SEASON: "2023-24", total_centers: 101, total_fg3m: 3000, total_fg3a: 8469, avg_fg3m: 29.70, fg3_pct: 0.354 },
+  { SEASON: "2024-25", total_centers: 107, total_fg3m: 3494, total_fg3a: 9895, avg_fg3m: 32.65, fg3_pct: 0.353 }
+];
+
+window.SHOOTING_CENTERS_TOP5 = [
+  { SEASON: "2004-05", PLAYER_NAME: "Rasheed Wallace",    FG3M: 75,  FG3A: 236, FG3_PCT: 0.318, GP: 79 },
+  { SEASON: "2004-05", PLAYER_NAME: "Clifford Robinson",  FG3M: 67,  FG3A: 193, FG3_PCT: 0.347, GP: 71 },
+  { SEASON: "2004-05", PLAYER_NAME: "Robert Horry",       FG3M: 51,  FG3A: 138, FG3_PCT: 0.370, GP: 75 },
+  { SEASON: "2004-05", PLAYER_NAME: "Predrag Drobnjak",   FG3M: 25,  FG3A: 71,  FG3_PCT: 0.352, GP: 71 },
+  { SEASON: "2004-05", PLAYER_NAME: "Mehmet Okur",        FG3M: 17,  FG3A: 63,  FG3_PCT: 0.270, GP: 82 },
+  { SEASON: "2016-17", PLAYER_NAME: "Brook Lopez",        FG3M: 134, FG3A: 387, FG3_PCT: 0.346, GP: 75 },
+  { SEASON: "2016-17", PLAYER_NAME: "DeMarcus Cousins",   FG3M: 131, FG3A: 363, FG3_PCT: 0.361, GP: 72 },
+  { SEASON: "2016-17", PLAYER_NAME: "Frank Kaminsky",     FG3M: 116, FG3A: 354, FG3_PCT: 0.328, GP: 75 },
+  { SEASON: "2016-17", PLAYER_NAME: "Marc Gasol",         FG3M: 104, FG3A: 268, FG3_PCT: 0.388, GP: 74 },
+  { SEASON: "2016-17", PLAYER_NAME: "Marreese Speights",  FG3M: 103, FG3A: 277, FG3_PCT: 0.372, GP: 82 },
+  { SEASON: "2024-25", PLAYER_NAME: "Naz Reid",           FG3M: 175, FG3A: 462, FG3_PCT: 0.379, GP: 80 },
+  { SEASON: "2024-25", PLAYER_NAME: "Myles Turner",       FG3M: 156, FG3A: 394, FG3_PCT: 0.396, GP: 72 },
+  { SEASON: "2024-25", PLAYER_NAME: "Jaren Jackson Jr.",  FG3M: 146, FG3A: 389, FG3_PCT: 0.375, GP: 74 },
+  { SEASON: "2024-25", PLAYER_NAME: "Karl-Anthony Towns", FG3M: 142, FG3A: 338, FG3_PCT: 0.420, GP: 72 },
+  { SEASON: "2024-25", PLAYER_NAME: "Victor Wembanyama",  FG3M: 142, FG3A: 403, FG3_PCT: 0.352, GP: 46 }
+];

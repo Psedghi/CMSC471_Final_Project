@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Shooting Centers | Evolution of Basketball</title>
   <link rel="stylesheet" href="../styles/main.css">
+  <link rel="stylesheet" href="../styles/shooting-centers.css">
 </head>
 <body>
   <header class="site-header">
@@ -17,23 +18,60 @@
   <main class="viz-shell">
     <section class="viz-heading">
       <p class="eyebrow">Visualization 02</p>
-      <h1 data-viz-title>Shooting Centers</h1>
-      <p data-viz-description></p>
+      <h1>Shooting Centers</h1>
+      <p>Centers have transformed from the least likely shooters in basketball into reliable three-point threats. The numbers tell a dramatic story.</p>
     </section>
 
-    <section class="viz-layout">
-      <div class="viz-stage">
-        <div class="placeholder-chart" data-viz-chart></div>
-      </div>
+    <section class="viz-layout sc-layout">
+      <div class="viz-stage sc-stage">
 
-      <aside class="data-panel" aria-label="Planned data sources">
-        <h2>Data</h2>
-        <ul class="data-list" data-viz-data></ul>
-      </aside>
+        <div class="sc-story" data-sc-story></div>
+
+        <section class="chart-panel" aria-label="Interactive center shooting chart">
+          <div class="chart-toolbar">
+            <div>
+              <p class="eyebrow">Explore the trend</p>
+              <h2 data-metric-name>Total 3-point attempts by centers</h2>
+              <p class="metric-readout" data-metric-readout></p>
+            </div>
+
+            <div class="metric-controls" role="tablist" aria-label="Center shooting metric">
+              <button class="metric-button is-active" type="button" data-metric="total_fg3a">3PA Volume</button>
+              <button class="metric-button" type="button" data-metric="total_fg3m">3PM Volume</button>
+              <button class="metric-button" type="button" data-metric="avg_fg3m">Avg per Center</button>
+              <button class="metric-button" type="button" data-metric="fg3_pct">3P%</button>
+            </div>
+          </div>
+
+          <div class="chart-wrap">
+            <svg class="line-chart" data-sc-chart viewBox="0 0 860 430" role="img" aria-labelledby="sc-chart-title sc-chart-desc">
+              <title id="sc-chart-title">NBA center 3-point shooting trend chart</title>
+              <desc id="sc-chart-desc">Line chart showing center 3-point shooting metrics by season.</desc>
+            </svg>
+            <div class="chart-tooltip" data-chart-tooltip hidden></div>
+          </div>
+        </section>
+
+        <section class="sc-context" aria-label="Center shooting context">
+          <div>
+            <p class="eyebrow">Then vs now</p>
+            <h2>How much has center shooting changed?</h2>
+            <div class="driver-list" data-driver-list></div>
+          </div>
+
+          <div>
+            <p class="eyebrow">Season leaders</p>
+            <h2>Top shooting centers, 2024-25</h2>
+            <div class="leader-list" data-leader-list></div>
+          </div>
+        </section>
+
+      </div>
     </section>
   </main>
 
   <script src="../scripts/viz-page.js"></script>
+  <script src="../scripts/shooting-centers-data.js"></script>
   <script src="../scripts/shooting-centers.js"></script>
 </body>
 </html>
