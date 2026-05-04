@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Load Management | Evolution of Basketball</title>
   <link rel="stylesheet" href="../styles/main.css">
+  <link rel="stylesheet" href="../styles/load-management.css">
 </head>
 <body>
   <header class="site-header">
@@ -23,7 +24,43 @@
 
     <section class="viz-layout">
       <div class="viz-stage">
-        <div class="placeholder-chart" data-viz-chart></div>
+        <section class="load-controls" aria-label="Load management chart controls">
+          <div>
+            <p class="eyebrow">Select metric</p>
+            <div class="metric-controls" role="tablist" aria-label="Load management metric">
+              <button class="metric-button is-active" type="button" data-load-metric="avgGamesPlayed">Games played</button>
+              <button class="metric-button" type="button" data-load-metric="avgMinutesPerGame">Minutes per game</button>
+              <button class="metric-button" type="button" data-load-metric="restGamesPerStar">Rest games</button>
+            </div>
+          </div>
+          <p class="metric-note" data-load-description></p>
+        </section>
+
+        <div class="load-chart-wrap">
+          <svg class="line-chart" data-load-chart viewBox="0 0 860 420" role="img" aria-labelledby="load-chart-title load-chart-desc">
+            <title id="load-chart-title">NBA load management trends</title>
+            <desc id="load-chart-desc">Line chart showing changes in games played and rest patterns for high-minute players over time.</desc>
+          </svg>
+          <div class="chart-tooltip" data-load-tooltip hidden></div>
+        </div>
+
+        <section class="load-insights" aria-label="Load management summary">
+          <article>
+            <span>Earliest season in view</span>
+            <strong data-load-first-season></strong>
+            <p data-load-first-value></p>
+          </article>
+          <article>
+            <span>Latest season in view</span>
+            <strong data-load-last-season></strong>
+            <p data-load-last-value></p>
+          </article>
+          <article>
+            <span>Net change</span>
+            <strong data-load-delta></strong>
+            <p data-load-context></p>
+          </article>
+        </section>
       </div>
 
       <aside class="data-panel" aria-label="Planned data sources">
@@ -34,6 +71,7 @@
   </main>
 
   <script src="../scripts/viz-page.js"></script>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
   <script src="../scripts/load-management.js"></script>
 </body>
 </html>

@@ -1,0 +1,141 @@
+.load-controls {
+  display: grid;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.metric-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.metric-button {
+  min-height: 40px;
+  padding: 0 14px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--muted);
+  cursor: pointer;
+  font: inherit;
+  font-weight: 700;
+}
+
+.metric-button:hover,
+.metric-button:focus-visible,
+.metric-button.is-active {
+  border-color: var(--accent);
+  color: var(--accent-dark);
+}
+
+.metric-button:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
+
+.metric-note {
+  margin: 0;
+  color: var(--muted);
+}
+
+.load-chart-wrap {
+  position: relative;
+}
+
+.line-chart {
+  display: block;
+  width: 100%;
+  height: auto;
+  min-height: 320px;
+}
+
+.chart-grid line {
+  stroke: var(--line);
+}
+
+.chart-grid text,
+.chart-axis text {
+  fill: var(--muted);
+  font-size: 0.78rem;
+}
+
+.chart-line {
+  filter: drop-shadow(0 8px 12px rgba(23, 32, 42, 0.12));
+}
+
+.chart-point {
+  cursor: pointer;
+}
+
+.chart-point:hover,
+.chart-point:focus {
+  r: 7;
+}
+
+.chart-tooltip {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  display: grid;
+  gap: 2px;
+  width: max-content;
+  max-width: 220px;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--ink);
+  color: var(--surface);
+  font-size: 0.85rem;
+  pointer-events: none;
+}
+
+.chart-tooltip[hidden] {
+  display: none;
+}
+
+.chart-tooltip span {
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.load-insights {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.load-insights article {
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fbfcfd;
+}
+
+.load-insights span {
+  display: block;
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
+.load-insights strong {
+  display: block;
+  margin-top: 4px;
+  font-size: 1.15rem;
+}
+
+.load-insights p {
+  margin: 4px 0 0;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 760px) {
+  .load-insights {
+    grid-template-columns: 1fr;
+  }
+
+  .metric-button {
+    flex: 1 1 150px;
+  }
+}
