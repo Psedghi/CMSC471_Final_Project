@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Player Size | Evolution of Basketball</title>
   <link rel="stylesheet" href="../styles/main.css">
+  <link rel="stylesheet" href="../styles/player-size.css">
 </head>
 <body>
   <header class="site-header">
@@ -17,22 +18,73 @@
   <main class="viz-shell">
     <section class="viz-heading">
       <p class="eyebrow">Visualization 04</p>
-      <h1 data-viz-title>Player Size</h1>
-      <p data-viz-description></p>
+      <h1>Player Size</h1>
+      <p>Guards have slowly grown taller while the traditional "big man" center is shrinking. Scrub through two decades of NBA rosters to see how the height distribution has shifted by position.</p>
     </section>
 
-    <section class="viz-layout">
-      <div class="viz-stage">
-        <div class="placeholder-chart" data-viz-chart></div>
-      </div>
+    <section class="viz-layout ps-layout">
+      <div class="viz-stage ps-stage">
 
-      <aside class="data-panel" aria-label="Planned data sources">
-        <h2>Data</h2>
-        <ul class="data-list" data-viz-data></ul>
-      </aside>
+        <div class="ps-controls">
+          <div class="ps-season-row">
+            <span class="eyebrow">Season</span>
+            <span class="season-label">2024-25</span>
+          </div>
+          <input
+            id="size-slider"
+            class="ps-slider"
+            type="range"
+            min="0"
+            max="20"
+            value="20"
+            aria-label="Select NBA season"
+          >
+        </div>
+
+        <div class="ps-stat-cards">
+          <article class="ps-stat-card" style="--card-color: #2457d6">
+            <h3>Guards</h3>
+            <strong data-stat="G">—</strong>
+            <p>avg height</p>
+            <small data-count="G"></small>
+          </article>
+          <article class="ps-stat-card" style="--card-color: #247a55">
+            <h3>Forwards</h3>
+            <strong data-stat="F">—</strong>
+            <p>avg height</p>
+            <small data-count="F"></small>
+          </article>
+          <article class="ps-stat-card" style="--card-color: #c8452d">
+            <h3>Centers</h3>
+            <strong data-stat="C">—</strong>
+            <p>avg height</p>
+            <small data-count="C"></small>
+          </article>
+        </div>
+
+        <div class="ps-chart-wrap">
+          <svg id="size-svg" role="img" aria-label="NBA player height distribution by position and season"></svg>
+          <div id="size-tooltip" class="ps-tooltip" role="tooltip"></div>
+        </div>
+
+        <section class="ps-context" aria-label="Player size context">
+          <div class="ps-insight">
+            <p class="eyebrow">What the data shows</p>
+            <h2>Size is converging</h2>
+            <p>Centers have trended slightly shorter as the game rewards mobility over pure height. Guards have crept upward — the positional height gap has narrowed by roughly two inches since 2004-05.</p>
+          </div>
+          <div class="ps-insight">
+            <p class="eyebrow">How to read this chart</p>
+            <h2>Each dot is one player</h2>
+            <p>Players are split by their primary position — Guard, Forward, or Center. Horizontal spread is random jitter to prevent overlap. The colored line in each column marks the position average for the selected season.</p>
+          </div>
+        </section>
+
+      </div>
     </section>
   </main>
 
+  <script src="https://d3js.org/d3.v7.min.js"></script>
   <script src="../scripts/viz-page.js"></script>
   <script src="../scripts/player-size.js"></script>
 </body>

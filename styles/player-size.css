@@ -1,0 +1,211 @@
+.ps-layout {
+  grid-template-columns: 1fr;
+}
+
+.ps-stage {
+  display: grid;
+  gap: 22px;
+}
+
+/* ── Season slider controls ─────────────────────────────────────── */
+
+.ps-controls {
+  display: grid;
+  gap: 8px;
+}
+
+.ps-season-row {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.ps-season-row .eyebrow {
+  margin: 0;
+}
+
+.season-label {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.ps-slider {
+  width: 100%;
+  max-width: 560px;
+  height: 6px;
+  appearance: none;
+  -webkit-appearance: none;
+  border-radius: 3px;
+  background: var(--line);
+  outline: none;
+  cursor: pointer;
+}
+
+.ps-slider::-webkit-slider-thumb {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: 2px solid var(--accent-dark);
+  cursor: pointer;
+}
+
+.ps-slider::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: 2px solid var(--accent-dark);
+  cursor: pointer;
+}
+
+.ps-slider:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+}
+
+/* ── Stat cards ─────────────────────────────────────────────────── */
+
+.ps-stat-cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.ps-stat-card {
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  border-top: 3px solid var(--card-color, var(--accent));
+  border-radius: 8px;
+  background: #fbfcfd;
+}
+
+.ps-stat-card h3 {
+  margin: 0 0 6px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--card-color, var(--accent));
+}
+
+.ps-stat-card strong {
+  display: block;
+  font-size: 1.65rem;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.1;
+}
+
+.ps-stat-card p {
+  margin: 2px 0 0;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.ps-stat-card small {
+  display: block;
+  margin-top: 4px;
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+
+/* ── Chart ──────────────────────────────────────────────────────── */
+
+.ps-chart-wrap {
+  position: relative;
+}
+
+#size-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+/* Y-axis and grid lines (rendered by D3) */
+#size-svg .y-axis path,
+#size-svg .y-axis line {
+  stroke: var(--line);
+}
+
+#size-svg .y-axis text {
+  fill: var(--muted);
+  font-size: 0.78rem;
+}
+
+#size-svg .grid-lines line {
+  stroke: var(--line);
+  stroke-width: 1;
+  stroke-dasharray: 3 3;
+}
+
+#size-svg .col-dividers line {
+  stroke: var(--line);
+  stroke-width: 1;
+}
+
+#size-svg .pos-label {
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+/* ── Tooltip ────────────────────────────────────────────────────── */
+
+.ps-tooltip {
+  position: fixed;
+  z-index: 10;
+  padding: 9px 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--ink);
+  color: var(--surface);
+  font-size: 0.84rem;
+  line-height: 1.5;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.12s ease;
+  max-width: 200px;
+}
+
+/* ── Context panels ─────────────────────────────────────────────── */
+
+.ps-context {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.ps-insight {
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fbfcfd;
+}
+
+.ps-insight .eyebrow {
+  margin-bottom: 4px;
+}
+
+.ps-insight h2 {
+  margin-bottom: 10px;
+}
+
+.ps-insight p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+/* ── Responsive ─────────────────────────────────────────────────── */
+
+@media (max-width: 640px) {
+  .ps-stat-cards,
+  .ps-context {
+    grid-template-columns: 1fr;
+  }
+}
