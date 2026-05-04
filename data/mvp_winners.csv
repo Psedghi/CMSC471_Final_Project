@@ -1,0 +1,22 @@
+SEASON,PLAYER_NAME,COUNTRY,IS_INTERNATIONAL
+2004-05,Steve Nash,Canada,True
+2005-06,Steve Nash,Canada,True
+2006-07,Dirk Nowitzki,Germany,True
+2007-08,Kobe Bryant,USA,False
+2008-09,LeBron James,USA,False
+2009-10,LeBron James,USA,False
+2010-11,Derrick Rose,USA,False
+2011-12,LeBron James,USA,False
+2012-13,LeBron James,USA,False
+2013-14,Kevin Durant,USA,False
+2014-15,Stephen Curry,USA,False
+2015-16,Stephen Curry,USA,False
+2016-17,Russell Westbrook,USA,False
+2017-18,James Harden,USA,False
+2018-19,Giannis Antetokounmpo,Greece,True
+2019-20,Giannis Antetokounmpo,Greece,True
+2020-21,Nikola Jokic,Serbia,True
+2021-22,Nikola Jokic,Serbia,True
+2022-23,Joel Embiid,Cameroon,True
+2023-24,Nikola Jokic,Serbia,True
+2024-25,Shai Gilgeous-Alexander,Canada,True

@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Global Superstars | Evolution of Basketball</title>
   <link rel="stylesheet" href="../styles/main.css">
+  <link rel="stylesheet" href="../styles/global-superstars.css">
 </head>
 <body>
   <header class="site-header">
@@ -17,22 +18,64 @@
   <main class="viz-shell">
     <section class="viz-heading">
       <p class="eyebrow">Visualization 05</p>
-      <h1 data-viz-title>Global Superstars</h1>
-      <p data-viz-description></p>
+      <h1>Global Superstars</h1>
+      <p>The NBA has become a world league. International players hold more than a third of all roster spots — and have dominated the MVP award for seven straight seasons.</p>
     </section>
 
-    <section class="viz-layout">
-      <div class="viz-stage">
-        <div class="placeholder-chart" data-viz-chart></div>
-      </div>
+    <section class="viz-layout gs-layout">
+      <div class="viz-stage gs-stage">
 
-      <aside class="data-panel" aria-label="Planned data sources">
-        <h2>Data</h2>
-        <ul class="data-list" data-viz-data></ul>
-      </aside>
+        <div class="gs-story" data-gs-story></div>
+
+        <section class="chart-panel" aria-label="Interactive international players chart">
+          <div class="chart-toolbar">
+            <div>
+              <p class="eyebrow">Explore the trend</p>
+              <h2 data-metric-name>International players in the NBA</h2>
+              <p class="metric-readout" data-metric-readout></p>
+            </div>
+
+            <div class="metric-controls" role="tablist" aria-label="International players metric">
+              <button class="metric-button is-active" type="button" data-metric="intl_players">Players</button>
+              <button class="metric-button" type="button" data-metric="countries">Countries</button>
+            </div>
+          </div>
+
+          <div class="chart-wrap">
+            <svg class="line-chart" data-gs-chart viewBox="0 0 860 430" role="img" aria-labelledby="gs-chart-title gs-chart-desc">
+              <title id="gs-chart-title">International players in the NBA by season</title>
+              <desc id="gs-chart-desc">Line chart showing international player count from 2004-05 through 2024-25.</desc>
+            </svg>
+            <div class="chart-tooltip" data-chart-tooltip hidden></div>
+          </div>
+
+          <div class="chart-legend">
+            <span class="legend-item">
+              <span class="legend-mvp"></span>
+              Season with an international MVP winner
+            </span>
+          </div>
+        </section>
+
+        <section class="gs-context" aria-label="International growth context">
+          <div>
+            <p class="eyebrow">Then vs now</p>
+            <h2>How much has international presence changed?</h2>
+            <div class="driver-list" data-driver-list></div>
+          </div>
+
+          <div>
+            <p class="eyebrow">International MVPs</p>
+            <h2>The award follows the talent</h2>
+            <div class="mvp-list" data-mvp-list></div>
+          </div>
+        </section>
+
+      </div>
     </section>
   </main>
 
+  <script src="https://d3js.org/d3.v7.min.js"></script>
   <script src="../scripts/viz-page.js"></script>
   <script src="../scripts/global-superstars.js"></script>
 </body>
