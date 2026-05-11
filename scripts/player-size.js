@@ -4,7 +4,7 @@ const POS_COLORS = { G: "#2457d6", F: "#247a55", C: "#c8452d" };
 
 const SVG_W  = 680;
 const SVG_H  = 460;
-const MARGIN = { top: 20, right: 30, bottom: 50, left: 62 };
+const MARGIN = { top: 20, right: 30, bottom: 66, left: 78 };
 const PLOT_W = SVG_W - MARGIN.left - MARGIN.right;
 const PLOT_H = SVG_H - MARGIN.top  - MARGIN.bottom;
 
@@ -100,11 +100,29 @@ function buildScaffold() {
     svg.append("text")
       .attr("class", "pos-label")
       .attr("x", colCenter(i))
-      .attr("y", MARGIN.top + PLOT_H + 34)
+      .attr("y", MARGIN.top + PLOT_H + 28)
       .attr("text-anchor", "middle")
       .style("fill", POS_COLORS[pos])
       .text(POS_LABELS[pos]);
   });
+
+  // X-axis title
+  svg.append("text")
+    .attr("class", "ps-axis-title ps-axis-title--x")
+    .attr("x", MARGIN.left + PLOT_W / 2)
+    .attr("y", SVG_H - 4)
+    .attr("text-anchor", "middle")
+    .text("Position");
+
+  // Y-axis title
+  const yMid = MARGIN.top + PLOT_H / 2;
+  svg.append("text")
+    .attr("class", "ps-axis-title ps-axis-title--y")
+    .attr("x", 14)
+    .attr("y", yMid)
+    .attr("text-anchor", "middle")
+    .attr("transform", `rotate(-90, 14, ${yMid})`)
+    .text("Height");
 
   // Layers (order matters: grid → dots → avg lines)
   svg.append("g").attr("id", "dots-layer");

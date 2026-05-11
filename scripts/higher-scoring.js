@@ -24,15 +24,17 @@ const metrics = {
   PTS_PER_TEAM_GAME: {
     label: "Points per team game",
     shortLabel: "Points",
+    yAxisLabel: "Pts per team game",
     unit: "points",
     color: "#c8452d",
     formatter: (value) => value.toFixed(1),
     plain: "The average number of points each team scored in a game.",
-    readout: "This is the headline number fans feel on the scoreboard: NBA games now have much more scoring on a typical night."
+    readout: "NBA games now have much more scoring on a typical night."
   },
   OFF_RATING: {
     label: "Points per 100 possessions",
     shortLabel: "Offense",
+    yAxisLabel: "Pts per 100 possessions",
     unit: "points per 100 possessions",
     color: "#2457d6",
     formatter: (value) => value.toFixed(1),
@@ -42,6 +44,7 @@ const metrics = {
   PACE: {
     label: "Possessions per 48 minutes",
     shortLabel: "Pace",
+    yAxisLabel: "Possessions per 48 min",
     unit: "possessions",
     color: "#247a55",
     formatter: (value) => value.toFixed(1),
@@ -51,6 +54,7 @@ const metrics = {
   FG3A_PER_TEAM_GAME: {
     label: "3-point attempts per team game",
     shortLabel: "3PA",
+    yAxisLabel: "3PA per team game",
     unit: "attempts",
     color: "#7a3f98",
     formatter: (value) => value.toFixed(1),
@@ -60,6 +64,7 @@ const metrics = {
   TS_PCT: {
     label: "True shooting percentage",
     shortLabel: "TS%",
+    yAxisLabel: "True shooting %",
     unit: "shooting percentage",
     color: "#b15f12",
     formatter: (value) => `${(value * 100).toFixed(1)}%`,
@@ -229,7 +234,7 @@ function renderChart(metricKey) {
   const metric = metrics[metricKey];
   const width = 860;
   const height = 430;
-  const margin = { top: 34, right: 34, bottom: 56, left: 70 };
+  const margin = { top: 34, right: 34, bottom: 72, left: 92 };
   const plotWidth = width - margin.left - margin.right;
   const plotHeight = height - margin.top - margin.bottom;
   const values = data.map((row) => Number(row[metricKey]));
@@ -280,13 +285,32 @@ function renderChart(metricKey) {
     }
     const label = svgEl("text", {
       x: x(index),
-      y: height - 18,
+      y: height - 34,
       "text-anchor": "middle"
     });
     label.textContent = row.SEASON;
     xAxis.appendChild(label);
   });
+  const xAxisTitle = svgEl("text", {
+    class: "chart-axis-title chart-axis-title--x",
+    x: margin.left + plotWidth / 2,
+    y: height - 8,
+    "text-anchor": "middle"
+  });
+  xAxisTitle.textContent = "Season";
+  xAxis.appendChild(xAxisTitle);
   chart.appendChild(xAxis);
+
+  const yMid = margin.top + plotHeight / 2;
+  const yAxisTitle = svgEl("text", {
+    class: "chart-axis-title chart-axis-title--y",
+    x: 20,
+    y: yMid,
+    "text-anchor": "middle",
+    transform: `rotate(-90, 20, ${yMid})`
+  });
+  yAxisTitle.textContent = metric.yAxisLabel;
+  chart.appendChild(yAxisTitle);
 
   chart.appendChild(svgEl("path", {
     class: "chart-line",

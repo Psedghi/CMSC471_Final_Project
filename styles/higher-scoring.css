@@ -104,6 +104,16 @@
   font-size: 0.78rem;
 }
 
+.chart-axis-title {
+  fill: var(--ink);
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.chart-axis-title--y {
+  letter-spacing: 0.02em;
+}
+
 .chart-line {
   filter: drop-shadow(0 8px 12px rgba(23, 32, 42, 0.12));
 }

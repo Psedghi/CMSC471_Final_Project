@@ -153,6 +153,16 @@
   font-weight: 700;
 }
 
+#size-svg .ps-axis-title {
+  fill: var(--ink);
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+#size-svg .ps-axis-title--y {
+  letter-spacing: 0.02em;
+}
+
 /* ── Tooltip ────────────────────────────────────────────────────── */
 
 .ps-tooltip {
