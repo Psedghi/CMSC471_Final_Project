@@ -75,6 +75,30 @@
   border: 2px solid #fff;
 }
 
+.play-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: var(--accent);
+  color: #fff;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: transform 0.15s, background 0.15s;
+}
+
+.play-btn:hover {
+  transform: scale(1.08);
+  background: var(--accent-dark, var(--accent));
+}
+
+.play-btn .pause-icon { display: none; }
+.play-btn.playing .play-icon { display: none; }
+.play-btn.playing .pause-icon { display: block; }
+
 .toggle-row {
   display: flex;
   gap: 0.6rem;

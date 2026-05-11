@@ -15,6 +15,8 @@ const yScale = d3.scaleLinear().domain([-2, 40]).range([H, 0]);
 let allData      = {};
 let timelineData = [];
 let currentMode  = 'all';
+let playTimer    = null;
+const PLAY_STEP_MS = 600;
 
 Promise.all([
   d3.json('../data/shots_heatmap.json'),
@@ -33,6 +35,7 @@ Promise.all([
   update(seasons[seasons.length - 1]);
 
   slider.addEventListener('input', () => {
+    stopPlayback();
     update(seasons[+slider.value]);
   });
 
@@ -44,7 +47,48 @@ Promise.all([
       update(seasons[+slider.value]);
     });
   });
+
+  const playBtn = document.getElementById('play-btn');
+  playBtn.addEventListener('click', () => {
+    if (playTimer) {
+      stopPlayback();
+      return;
+    }
+    if (+slider.value >= seasons.length - 1) {
+      slider.value = 0;
+      update(seasons[0]);
+    }
+    startPlayback(seasons, slider, playBtn);
+  });
 });
+
+function startPlayback(seasons, slider, playBtn) {
+  playBtn.classList.add('playing');
+  playBtn.setAttribute('aria-label', 'Pause animation');
+  playTimer = setInterval(() => {
+    const next = +slider.value + 1;
+    if (next >= seasons.length) {
+      slider.value = seasons.length - 1;
+      update(seasons[seasons.length - 1]);
+      stopPlayback();
+      return;
+    }
+    slider.value = next;
+    update(seasons[next]);
+  }, PLAY_STEP_MS);
+}
+
+function stopPlayback() {
+  if (playTimer) {
+    clearInterval(playTimer);
+    playTimer = null;
+  }
+  const playBtn = document.getElementById('play-btn');
+  if (playBtn) {
+    playBtn.classList.remove('playing');
+    playBtn.setAttribute('aria-label', 'Play animation');
+  }
+}
 
 function buildCourt() {
   const svg = d3.select('#court-svg')
