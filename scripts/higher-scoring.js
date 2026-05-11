@@ -1,6 +1,6 @@
 initVisualizationPage({
   title: "Higher Scoring",
-  description: "NBA teams score far more than they did two decades ago. Use the tabs to separate the main ingredients: more scoring, more possessions, more threes, and better shot-making.",
+  description: "NBA games have become much higher scoring. This visualization breaks that change into plain pieces: how many points teams score, how fast they play, how often they shoot threes, and how efficiently they turn shots into points.",
   chartLabel: "Scoring timeline",
   placeholder: "League-wide NBA scoring trends from 2004-05 through 2024-25.",
   dataSources: [
@@ -32,7 +32,7 @@ const metrics = {
   },
   OFF_RATING: {
     label: "Points per 100 possessions",
-    shortLabel: "Offense",
+    shortLabel: "Same chances",
     unit: "points per 100 possessions",
     color: "#2457d6",
     formatter: (value) => value.toFixed(1),
@@ -41,7 +41,7 @@ const metrics = {
   },
   PACE: {
     label: "Possessions per 48 minutes",
-    shortLabel: "Pace",
+    shortLabel: "Game speed",
     unit: "possessions",
     color: "#247a55",
     formatter: (value) => value.toFixed(1),
@@ -50,7 +50,7 @@ const metrics = {
   },
   FG3A_PER_TEAM_GAME: {
     label: "3-point attempts per team game",
-    shortLabel: "3PA",
+    shortLabel: "3-point shots",
     unit: "attempts",
     color: "#7a3f98",
     formatter: (value) => value.toFixed(1),
@@ -59,11 +59,11 @@ const metrics = {
   },
   TS_PCT: {
     label: "True shooting percentage",
-    shortLabel: "TS%",
+    shortLabel: "Shot efficiency",
     unit: "shooting percentage",
     color: "#b15f12",
     formatter: (value) => `${(value * 100).toFixed(1)}%`,
-    plain: "A shooting percentage that treats threes as more valuable and includes free throws.",
+    plain: "A shooting percentage that accounts for the extra value of threes and includes free throws.",
     readout: "This shows that teams are not only taking different shots; they are turning shots and free throws into points more efficiently."
   }
 };

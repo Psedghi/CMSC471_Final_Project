@@ -22,6 +22,33 @@
       <p data-viz-description></p>
     </section>
 
+    <section class="scoring-intro" aria-label="How to read the Higher Scoring visualization">
+      <div>
+        <p class="eyebrow">Before the chart</p>
+        <h2>What does “higher scoring” actually mean?</h2>
+        <p>
+          This page looks at the average NBA team, not one specific player or franchise.
+          Each dot is one regular season. When the line rises, the typical team is scoring
+          more, taking more of a certain kind of shot, or creating more chances to score.
+        </p>
+      </div>
+
+      <div class="term-list" aria-label="Basketball terms used in this visualization">
+        <div>
+          <strong>Possession</strong>
+          <span>One trip down the court where a team has the ball and tries to score.</span>
+        </div>
+        <div>
+          <strong>3PA</strong>
+          <span>Three-point attempts. These shots are worth more, so taking more of them can raise scoring.</span>
+        </div>
+        <div>
+          <strong>Per team game</strong>
+          <span>The average for one team in one game, which keeps seasons comparable.</span>
+        </div>
+      </div>
+    </section>
+
     <section class="viz-layout scoring-layout">
       <div class="viz-stage scoring-stage">
         <div class="score-story" data-score-story></div>
@@ -36,10 +63,10 @@
 
             <div class="metric-controls" role="tablist" aria-label="Scoring metric">
               <button class="metric-button is-active" type="button" data-metric="PTS_PER_TEAM_GAME">Points</button>
-              <button class="metric-button" type="button" data-metric="OFF_RATING">Offense</button>
-              <button class="metric-button" type="button" data-metric="PACE">Pace</button>
-              <button class="metric-button" type="button" data-metric="FG3A_PER_TEAM_GAME">3PA</button>
-              <button class="metric-button" type="button" data-metric="TS_PCT">True Shooting</button>
+              <button class="metric-button" type="button" data-metric="OFF_RATING">Same chances</button>
+              <button class="metric-button" type="button" data-metric="PACE">Game speed</button>
+              <button class="metric-button" type="button" data-metric="FG3A_PER_TEAM_GAME">3-point shots</button>
+              <button class="metric-button" type="button" data-metric="TS_PCT">Shot efficiency</button>
             </div>
           </div>
 

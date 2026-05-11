@@ -1,11 +1,11 @@
 initVisualizationPage({
   title: "Load Management",
-  description: "Teams now protect high-minute players more aggressively. Use the metric tabs to compare changes in games played, minutes per game, and planned rest days for star-level workloads.",
+  description: "Modern NBA teams often manage star players like long-term investments. This visualization explains how availability, nightly minutes, and planned rest have shifted over time.",
   chartLabel: "Load management timeline",
-  placeholder: "D3 line chart comparing workload signals for high-minute players by season.",
+  placeholder: "Line chart comparing workload signals for high-minute players by season.",
   dataSources: [
     "Illustrative season summary based on public NBA trend reporting",
-    "Metrics shown: average games played, average minutes per game, average rest games for stars"
+    "Metrics shown: games played, minutes per game, and estimated rest games for stars"
   ]
 });
 
@@ -25,31 +25,38 @@ const loadManagementData = [
 
 const metricConfig = {
   avgGamesPlayed: {
-    label: "Games played",
-    description: "Average games played by star-level, high-minute players each season.",
+    label: "Availability",
+    chartLabel: "Games played",
+    description: "This shows how often star-level players appeared in regular-season games. Lower values mean stars are sitting out more often.",
     color: "#1f6feb",
     unit: "games",
-    formatter: (value) => `${value.toFixed(1)} games`
+    formatter: (value) => `${value.toFixed(1)} games`,
+    context: "A decline here means fans are less likely to see every star on a random regular-season night."
   },
   avgMinutesPerGame: {
-    label: "Minutes per game",
-    description: "Average minutes per game for the same group of high-workload players.",
+    label: "Nightly workload",
+    chartLabel: "Minutes per game",
+    description: "This shows how heavily stars are used when they do play. Fewer minutes can reduce fatigue even if the player still appears in the game.",
     color: "#2b9348",
     unit: "minutes",
-    formatter: (value) => `${value.toFixed(1)} mpg`
+    formatter: (value) => `${value.toFixed(1)} minutes`,
+    context: "A decline here means teams are trimming the nightly burden, not just deciding whether a player plays at all."
   },
   restGamesPerStar: {
-    label: "Rest games",
-    description: "Estimated games missed primarily for rest management among stars.",
+    label: "Planned rest",
+    chartLabel: "Rest games",
+    description: "This estimates how many games star-level players miss because teams are managing workload across the season.",
     color: "#c2410c",
     unit: "rest games",
-    formatter: (value) => `${value.toFixed(1)} rest games`
+    formatter: (value) => `${value.toFixed(1)} rest games`,
+    context: "An increase here captures the most debated part of load management: healthy or near-healthy stars sitting out."
   }
 };
 
-const svg = d3.select("[data-load-chart]");
+const chart = document.querySelector("[data-load-chart]");
 const tooltip = document.querySelector("[data-load-tooltip]");
 const descriptionEl = document.querySelector("[data-load-description]");
+const metricTitleEl = document.querySelector("[data-load-metric-title]");
 const buttons = Array.from(document.querySelectorAll("[data-load-metric]"));
 const firstSeasonEl = document.querySelector("[data-load-first-season]");
 const firstValueEl = document.querySelector("[data-load-first-value]");
@@ -63,94 +70,130 @@ const height = 420;
 const margin = { top: 28, right: 36, bottom: 56, left: 72 };
 const plotWidth = width - margin.left - margin.right;
 const plotHeight = height - margin.top - margin.bottom;
-const x = d3
-  .scalePoint()
-  .domain(loadManagementData.map((d) => d.season))
-  .range([margin.left, margin.left + plotWidth]);
-
 let activeMetric = "avgGamesPlayed";
 
+function svgEl(name, attrs = {}) {
+  const element = document.createElementNS("http://www.w3.org/2000/svg", name);
+  Object.entries(attrs).forEach(([key, value]) => element.setAttribute(key, value));
+  return element;
+}
+
+function scaleLinear(domainMin, domainMax, rangeMin, rangeMax) {
+  return (value) => {
+    if (domainMax === domainMin) {
+      return (rangeMin + rangeMax) / 2;
+    }
+    return rangeMin + ((value - domainMin) / (domainMax - domainMin)) * (rangeMax - rangeMin);
+  };
+}
+
 function drawMetric(metricKey) {
+  if (!chart) {
+    return;
+  }
+
+  hideTooltip();
+
   const config = metricConfig[metricKey];
-  const values = loadManagementData.map((d) => d[metricKey]);
-  const min = d3.min(values);
-  const max = d3.max(values);
+  const values = loadManagementData.map((row) => Number(row[metricKey]));
+  const min = Math.min(...values);
+  const max = Math.max(...values);
   const padding = Math.max((max - min) * 0.15, 0.6);
-  const y = d3
-    .scaleLinear()
-    .domain([min - padding, max + padding])
-    .range([margin.top + plotHeight, margin.top]);
+  const yMin = min - padding;
+  const yMax = max + padding;
+  const x = scaleLinear(0, loadManagementData.length - 1, margin.left, margin.left + plotWidth);
+  const y = scaleLinear(yMin, yMax, margin.top + plotHeight, margin.top);
+  const linePath = loadManagementData
+    .map((row, index) => `${index === 0 ? "M" : "L"} ${x(index).toFixed(2)} ${y(row[metricKey]).toFixed(2)}`)
+    .join(" ");
 
-  const line = d3
-    .line()
-    .x((d) => x(d.season))
-    .y((d) => y(d[metricKey]))
-    .curve(d3.curveMonotoneX);
+  chart.innerHTML = "";
 
-  svg.selectAll("*").remove();
-  svg
-    .append("title")
-    .text(`${config.label} trend from ${loadManagementData[0].season} to ${loadManagementData[loadManagementData.length - 1].season}`);
-  svg
-    .append("desc")
-    .text(`Line chart of ${config.label.toLowerCase()} for high-minute NBA players by season.`);
+  const title = svgEl("title", { id: "load-chart-title" });
+  title.textContent = `${config.chartLabel} trend`;
+  const desc = svgEl("desc", { id: "load-chart-desc" });
+  desc.textContent = `Line chart showing ${config.chartLabel.toLowerCase()} from ${loadManagementData[0].season} to ${loadManagementData[loadManagementData.length - 1].season}.`;
+  chart.appendChild(title);
+  chart.appendChild(desc);
 
-  const yAxis = d3
-    .axisLeft(y)
-    .ticks(5)
-    .tickSize(-plotWidth)
-    .tickFormat((value) => value.toFixed(1));
+  const grid = svgEl("g", { class: "chart-grid" });
+  const yTicks = 5;
+  for (let index = 0; index <= yTicks; index += 1) {
+    const value = yMin + ((yMax - yMin) / yTicks) * index;
+    const yPos = y(value);
+    grid.appendChild(svgEl("line", {
+      x1: margin.left,
+      x2: margin.left + plotWidth,
+      y1: yPos,
+      y2: yPos
+    }));
+    const label = svgEl("text", {
+      x: margin.left - 12,
+      y: yPos + 4,
+      "text-anchor": "end"
+    });
+    label.textContent = value.toFixed(1);
+    grid.appendChild(label);
+  }
+  chart.appendChild(grid);
 
-  svg
-    .append("g")
-    .attr("class", "chart-grid")
-    .attr("transform", `translate(${margin.left},0)`)
-    .call(yAxis)
-    .call((g) => g.select(".domain").remove())
-    .call((g) => g.selectAll("text").attr("x", -10));
+  const xAxis = svgEl("g", { class: "chart-axis" });
+  loadManagementData.forEach((row, index) => {
+    if (index % 2 !== 0 && index !== loadManagementData.length - 1) {
+      return;
+    }
+    const label = svgEl("text", {
+      x: x(index),
+      y: height - 20,
+      "text-anchor": "middle"
+    });
+    label.textContent = row.season;
+    xAxis.appendChild(label);
+  });
+  chart.appendChild(xAxis);
 
-  svg
-    .append("g")
-    .attr("class", "chart-axis")
-    .attr("transform", `translate(0,${margin.top + plotHeight})`)
-    .call(
-      d3
-        .axisBottom(x)
-        .tickValues(loadManagementData.map((d) => d.season).filter((_, i) => i % 2 === 0 || i === loadManagementData.length - 1))
-    )
-    .call((g) => g.select(".domain").remove());
+  chart.appendChild(svgEl("path", {
+    class: "chart-line",
+    d: linePath,
+    fill: "none",
+    stroke: config.color,
+    "stroke-width": 4,
+    "stroke-linecap": "round",
+    "stroke-linejoin": "round"
+  }));
 
-  svg
-    .append("path")
-    .datum(loadManagementData)
-    .attr("class", "chart-line")
-    .attr("fill", "none")
-    .attr("stroke", config.color)
-    .attr("stroke-width", 4)
-    .attr("stroke-linecap", "round")
-    .attr("stroke-linejoin", "round")
-    .attr("d", line);
-
-  svg
-    .append("g")
-    .selectAll("circle")
-    .data(loadManagementData)
-    .join("circle")
-    .attr("class", "chart-point")
-    .attr("cx", (d) => x(d.season))
-    .attr("cy", (d) => y(d[metricKey]))
-    .attr("r", 5.5)
-    .attr("fill", "#ffffff")
-    .attr("stroke", config.color)
-    .attr("stroke-width", 3)
-    .attr("tabindex", 0)
-    .on("pointerenter", (event, d) => showTooltip(event, d, metricKey))
-    .on("pointermove", (event, d) => showTooltip(event, d, metricKey))
-    .on("pointerleave", hideTooltip)
-    .on("focus", (event, d) => showTooltip(event, d, metricKey))
-    .on("blur", hideTooltip);
+  const points = svgEl("g", { class: "chart-points" });
+  loadManagementData.forEach((row, index) => {
+    const point = svgEl("circle", {
+      class: "chart-point",
+      cx: x(index),
+      cy: y(row[metricKey]),
+      r: 5.5,
+      fill: "#ffffff",
+      stroke: config.color,
+      "stroke-width": 3,
+      tabindex: "0",
+      role: "img",
+      "aria-label": `${row.season}: ${config.formatter(row[metricKey])}`
+    });
+    point.addEventListener("pointerenter", (event) => showTooltip(event, row, metricKey));
+    point.addEventListener("pointermove", (event) => showTooltip(event, row, metricKey));
+    point.addEventListener("pointerleave", hideTooltip);
+    point.addEventListener("click", (event) => {
+      event.currentTarget.blur();
+      hideTooltip();
+    });
+    point.addEventListener("focus", (event) => showTooltip(event, row, metricKey));
+    point.addEventListener("blur", hideTooltip);
+    points.appendChild(point);
+  });
+  chart.appendChild(points);
 
   renderSummary(metricKey);
+
+  if (metricTitleEl) {
+    metricTitleEl.textContent = config.chartLabel;
+  }
   if (descriptionEl) {
     descriptionEl.textContent = config.description;
   }
@@ -162,25 +205,25 @@ function renderSummary(metricKey) {
   const last = loadManagementData[loadManagementData.length - 1];
   const delta = last[metricKey] - first[metricKey];
   const direction = delta >= 0 ? "increased" : "decreased";
-  const sign = delta >= 0 ? "+" : "";
+  const sign = delta >= 0 ? "+" : "-";
 
   if (firstSeasonEl) {
     firstSeasonEl.textContent = first.season;
   }
   if (firstValueEl) {
-    firstValueEl.textContent = `${config.label}: ${config.formatter(first[metricKey])}`;
+    firstValueEl.textContent = `${config.chartLabel}: ${config.formatter(first[metricKey])}`;
   }
   if (lastSeasonEl) {
     lastSeasonEl.textContent = last.season;
   }
   if (lastValueEl) {
-    lastValueEl.textContent = `${config.label}: ${config.formatter(last[metricKey])}`;
+    lastValueEl.textContent = `${config.chartLabel}: ${config.formatter(last[metricKey])}`;
   }
   if (deltaEl) {
     deltaEl.textContent = `${sign}${Math.abs(delta).toFixed(1)} ${config.unit}`;
   }
   if (contextEl) {
-    contextEl.textContent = `Across this time window, ${config.label.toLowerCase()} ${direction} while teams became more intentional about managing star workloads.`;
+    contextEl.textContent = `${config.context} In this view, ${config.chartLabel.toLowerCase()} ${direction} from ${first.season} to ${last.season}.`;
   }
 }
 
@@ -188,18 +231,23 @@ function showTooltip(event, row, metricKey) {
   if (!tooltip) {
     return;
   }
+
   const config = metricConfig[metricKey];
   tooltip.innerHTML = `
     <strong>${row.season}</strong>
-    <span>${config.label}: ${config.formatter(row[metricKey])}</span>
-    <span>Games played: ${row.avgGamesPlayed.toFixed(1)}</span>
-    <span>Minutes: ${row.avgMinutesPerGame.toFixed(1)} mpg</span>
+    <span>${config.chartLabel}: ${config.formatter(row[metricKey])}</span>
+    <span>Availability: ${row.avgGamesPlayed.toFixed(1)} games</span>
+    <span>Nightly workload: ${row.avgMinutesPerGame.toFixed(1)} minutes</span>
+    <span>Planned rest: ${row.restGamesPerStar.toFixed(1)} games</span>
   `;
   tooltip.hidden = false;
 
   const wrapRect = document.querySelector(".load-chart-wrap").getBoundingClientRect();
-  const left = Math.max(8, Math.min(event.clientX - wrapRect.left + 12, wrapRect.width - 220));
-  const top = Math.max(8, event.clientY - wrapRect.top - 14);
+  const pointRect = event.currentTarget.getBoundingClientRect();
+  const clientX = event.clientX || pointRect.left + pointRect.width / 2;
+  const clientY = event.clientY || pointRect.top + pointRect.height / 2;
+  const left = Math.max(8, Math.min(clientX - wrapRect.left + 12, wrapRect.width - 230));
+  const top = Math.max(8, clientY - wrapRect.top - 14);
   tooltip.style.transform = `translate(${left}px, ${top}px)`;
 }
 
@@ -217,5 +265,9 @@ buttons.forEach((button) => {
     drawMetric(activeMetric);
   });
 });
+
+if (chart) {
+  chart.addEventListener("pointerleave", hideTooltip);
+}
 
 drawMetric(activeMetric);

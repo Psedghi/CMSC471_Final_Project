@@ -22,27 +22,76 @@
       <p data-viz-description></p>
     </section>
 
-    <section class="viz-layout">
-      <div class="viz-stage">
-        <section class="load-controls" aria-label="Load management chart controls">
-          <div>
-            <p class="eyebrow">Select metric</p>
-            <div class="metric-controls" role="tablist" aria-label="Load management metric">
-              <button class="metric-button is-active" type="button" data-load-metric="avgGamesPlayed">Games played</button>
-              <button class="metric-button" type="button" data-load-metric="avgMinutesPerGame">Minutes per game</button>
-              <button class="metric-button" type="button" data-load-metric="restGamesPerStar">Rest games</button>
-            </div>
-          </div>
-          <p class="metric-note" data-load-description></p>
+    <section class="load-intro" aria-label="Load management explanation">
+      <div>
+        <p class="eyebrow">Before the chart</p>
+        <h2>What is load management?</h2>
+        <p>
+          An NBA regular season is long: each team can play up to 82 games before the playoffs.
+          Load management is the strategy of reducing a player’s workload so they are healthier
+          later, even if that means playing fewer regular-season games or fewer minutes in each game.
+        </p>
+      </div>
+
+      <div class="term-list" aria-label="Load management terms">
+        <div>
+          <strong>Game played</strong>
+          <span>A game where the player actually appeared on the court.</span>
+        </div>
+        <div>
+          <strong>Minutes per game</strong>
+          <span>How long the player was used when they did play.</span>
+        </div>
+        <div>
+          <strong>Rest game</strong>
+          <span>A missed game that reflects planned workload management rather than normal rotation.</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="viz-layout load-layout">
+      <div class="viz-stage load-stage">
+        <section class="load-overview" aria-label="Load management overview">
+          <article>
+            <span>Big idea</span>
+            <strong>Less regular-season strain</strong>
+            <p>Teams increasingly treat player availability as a season-long resource, not just a game-by-game decision.</p>
+          </article>
+          <article>
+            <span>Why it matters</span>
+            <strong>Stars drive outcomes</strong>
+            <p>If a star player is healthier in April and May, a team may accept fewer minutes or games in January.</p>
+          </article>
+          <article>
+            <span>What to watch</span>
+            <strong>The tradeoff</strong>
+            <p>The chart compares availability, nightly workload, and planned rest pressure over time.</p>
+          </article>
         </section>
 
-        <div class="load-chart-wrap">
-          <svg class="line-chart" data-load-chart viewBox="0 0 860 420" role="img" aria-labelledby="load-chart-title load-chart-desc">
-            <title id="load-chart-title">NBA load management trends</title>
-            <desc id="load-chart-desc">Line chart showing changes in games played and rest patterns for high-minute players over time.</desc>
-          </svg>
-          <div class="chart-tooltip" data-load-tooltip hidden></div>
-        </div>
+        <section class="load-chart-panel" aria-label="Interactive load management chart">
+          <div class="chart-toolbar">
+            <div>
+              <p class="eyebrow">Explore the trend</p>
+              <h2 data-load-metric-title>Games played</h2>
+              <p class="metric-note" data-load-description></p>
+            </div>
+
+            <div class="metric-controls" role="tablist" aria-label="Load management metric">
+              <button class="metric-button is-active" type="button" data-load-metric="avgGamesPlayed">Availability</button>
+              <button class="metric-button" type="button" data-load-metric="avgMinutesPerGame">Nightly workload</button>
+              <button class="metric-button" type="button" data-load-metric="restGamesPerStar">Planned rest</button>
+            </div>
+          </div>
+
+          <div class="load-chart-wrap">
+            <svg class="line-chart" data-load-chart viewBox="0 0 860 420" role="img" aria-labelledby="load-chart-title load-chart-desc">
+              <title id="load-chart-title">NBA load management trends</title>
+              <desc id="load-chart-desc">Line chart showing changes in games played and rest patterns for high-minute players over time.</desc>
+            </svg>
+            <div class="chart-tooltip" data-load-tooltip hidden></div>
+          </div>
+        </section>
 
         <section class="load-insights" aria-label="Load management summary">
           <article>
@@ -61,17 +110,33 @@
             <p data-load-context></p>
           </article>
         </section>
-      </div>
 
-      <aside class="data-panel" aria-label="Planned data sources">
-        <h2>Data</h2>
-        <ul class="data-list" data-viz-data></ul>
-      </aside>
+        <section class="load-context" aria-label="Load management takeaways">
+          <div>
+            <p class="eyebrow">How to read this</p>
+            <h2>The line is about workload, not talent</h2>
+            <p>
+              A downward line for games or minutes does not mean players became worse.
+              It means teams are using high-value players differently. The decision is
+              partly medical, partly strategic, and partly about preserving playoff performance.
+            </p>
+          </div>
+
+          <div>
+            <p class="eyebrow">Important caveat</p>
+            <h2>Rest is hard to classify perfectly</h2>
+            <p>
+              Public data can show games played and minutes clearly. Planned rest is harder
+              because injury reports, team strategy, and true injury recovery can overlap.
+              Treat the rest trend as an estimate of the direction, not a perfect label for every missed game.
+            </p>
+          </div>
+        </section>
+      </div>
     </section>
   </main>
 
   <script src="../scripts/viz-page.js"></script>
-  <script src="https://d3js.org/d3.v7.min.js"></script>
   <script src="../scripts/load-management.js"></script>
 </body>
 </html>
