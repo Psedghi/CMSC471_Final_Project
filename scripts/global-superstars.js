@@ -11,6 +11,7 @@ const metrics = {
   intl_players: {
     label: "International players in the NBA",
     shortLabel: "Players",
+    yAxisLabel: "Intl. players on rosters",
     unit: "players",
     color: "#c8452d",
     formatter: (v) => Math.round(v).toString(),
@@ -20,6 +21,7 @@ const metrics = {
   countries: {
     label: "Countries represented",
     shortLabel: "Countries",
+    yAxisLabel: "Countries represented",
     unit: "countries",
     color: "#2457d6",
     formatter: (v) => Math.round(v).toString(),
@@ -142,7 +144,7 @@ function renderChart(metricKey) {
   const metric = metrics[metricKey];
   const width = 860;
   const height = 430;
-  const margin = { top: 34, right: 34, bottom: 56, left: 70 };
+  const margin = { top: 34, right: 34, bottom: 72, left: 92 };
   const plotWidth = width - margin.left - margin.right;
   const plotHeight = height - margin.top - margin.bottom;
   const values = data.map((row) => Number(row[metricKey]));
@@ -180,11 +182,30 @@ function renderChart(metricKey) {
   const xAxis = svgEl("g", { class: "chart-axis" });
   data.forEach((row, i) => {
     if (i % 4 !== 0 && i !== data.length - 1) return;
-    const label = svgEl("text", { x: x(i), y: height - 18, "text-anchor": "middle" });
+    const label = svgEl("text", { x: x(i), y: height - 34, "text-anchor": "middle" });
     label.textContent = row.SEASON;
     xAxis.appendChild(label);
   });
+  const xAxisTitle = svgEl("text", {
+    class: "chart-axis-title chart-axis-title--x",
+    x: margin.left + plotWidth / 2,
+    y: height - 8,
+    "text-anchor": "middle"
+  });
+  xAxisTitle.textContent = "Season";
+  xAxis.appendChild(xAxisTitle);
   chart.appendChild(xAxis);
+
+  const yMid = margin.top + plotHeight / 2;
+  const yAxisTitle = svgEl("text", {
+    class: "chart-axis-title chart-axis-title--y",
+    x: 20,
+    y: yMid,
+    "text-anchor": "middle",
+    transform: `rotate(-90, 20, ${yMid})`
+  });
+  yAxisTitle.textContent = metric.yAxisLabel;
+  chart.appendChild(yAxisTitle);
 
   chart.appendChild(svgEl("path", {
     class: "chart-line",
