@@ -13,26 +13,29 @@ const metrics = {
   total_fg3a: {
     label: "Total 3-point attempts by centers",
     shortLabel: "3PA",
+    yAxisLabel: "Total 3-Point Attempts (3PA)",
     unit: "attempts",
     color: "#c8452d",
     formatter: (v) => Math.round(v).toLocaleString(),
     axisFormatter: (v) => Math.round(v).toLocaleString(),
     plain: "The total number of three-point shots attempted by all centers in the league each season.",
-    readout: "This is the headline volume number. Centers went from a token presence beyond the arc to a genuine offensive weapon."
+    readout: "This is the headline volume number."
   },
   total_fg3m: {
     label: "Total 3-pointers made by centers",
     shortLabel: "3PM",
+    yAxisLabel: "Total 3-Pointers Made (3PM)",
     unit: "makes",
     color: "#2457d6",
     formatter: (v) => Math.round(v).toLocaleString(),
     axisFormatter: (v) => Math.round(v).toLocaleString(),
     plain: "How many three-pointers centers actually converted each season.",
-    readout: "Volume without accuracy means little, but centers have maintained decent shooting percentages even as attempts skyrocketed."
+    readout: "Centers have maintained decent shooting percentages even as attempts skyrocketed."
   },
   avg_fg3m: {
     label: "Average 3PM per center per season",
     shortLabel: "Avg 3PM",
+    yAxisLabel: "Avg 3PM per center",
     unit: "makes",
     color: "#247a55",
     formatter: (v) => v.toFixed(1),
@@ -43,6 +46,7 @@ const metrics = {
   fg3_pct: {
     label: "Center 3-point percentage",
     shortLabel: "3P%",
+    yAxisLabel: "Center 3-Point Percentage (3P%)",
     unit: "shooting percentage",
     color: "#7a3f98",
     formatter: (v) => `${(v * 100).toFixed(1)}%`,
@@ -75,17 +79,17 @@ function renderStory() {
 
   const items = [
     {
-      label: "Volume explosion",
+      label: "Volume explosion in 3-pointer attempts",
       value: `${volumeMultiplier}×`,
       detail: `more 3PA in ${last.SEASON} vs ${first.SEASON}`
     },
     {
-      label: "Avg per center",
+      label: "Avg per center: average number of three-pointers made (3PM) by an individual center",
       value: `${last.avg_fg3m.toFixed(1)} 3PM`,
       detail: `up from ${first.avg_fg3m.toFixed(1)} in ${first.SEASON}`
     },
     {
-      label: "Peak season",
+      label: "Peak season: highest point of volume in the data set",
       value: `${peakSeason.total_fg3a.toLocaleString()} 3PA`,
       detail: `${peakSeason.SEASON}, ${peakSeason.total_fg3m.toLocaleString()} made`
     }
@@ -167,7 +171,7 @@ function renderChart(metricKey) {
   const metric = metrics[metricKey];
   const width = 860;
   const height = 430;
-  const margin = { top: 34, right: 34, bottom: 56, left: 80 };
+  const margin = { top: 34, right: 34, bottom: 72, left: 92 };
   const plotWidth = width - margin.left - margin.right;
   const plotHeight = height - margin.top - margin.bottom;
   const values = data.map((row) => Number(row[metricKey]));
@@ -225,11 +229,30 @@ function renderChart(metricKey) {
   const xAxis = svgEl("g", { class: "chart-axis" });
   data.forEach((row, i) => {
     if (i % 4 !== 0 && i !== data.length - 1) return;
-    const label = svgEl("text", { x: x(i), y: height - 18, "text-anchor": "middle" });
+    const label = svgEl("text", { x: x(i), y: height - 34, "text-anchor": "middle" });
     label.textContent = row.SEASON;
     xAxis.appendChild(label);
   });
+  const xAxisTitle = svgEl("text", {
+    class: "chart-axis-title chart-axis-title--x",
+    x: margin.left + plotWidth / 2,
+    y: height - 8,
+    "text-anchor": "middle"
+  });
+  xAxisTitle.textContent = "Season";
+  xAxis.appendChild(xAxisTitle);
   chart.appendChild(xAxis);
+
+  const yMid = margin.top + plotHeight / 2;
+  const yAxisTitle = svgEl("text", {
+    class: "chart-axis-title chart-axis-title--y",
+    x: 20,
+    y: yMid,
+    "text-anchor": "middle",
+    transform: `rotate(-90, 20, ${yMid})`
+  });
+  yAxisTitle.textContent = metric.yAxisLabel;
+  chart.appendChild(yAxisTitle);
 
   chart.appendChild(svgEl("path", {
     class: "chart-line",
