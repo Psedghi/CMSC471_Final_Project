@@ -116,12 +116,61 @@
   margin-bottom: 8px;
 }
 
+.chart-controls-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+}
+
 .metric-controls {
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-end;
   gap: 8px;
-  max-width: 440px;
+  max-width: 480px;
+}
+
+.overlay-control {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.overlay-button {
+  min-height: 36px;
+  padding: 0 14px;
+  border: 1px dashed var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--muted);
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.88rem;
+  white-space: nowrap;
+}
+
+.overlay-button[aria-pressed="true"] {
+  border-color: #d97706;
+  border-style: solid;
+  color: #92400e;
+  background: #fef3c7;
+}
+
+.overlay-button:hover:not(:disabled),
+.overlay-button:focus-visible:not(:disabled) {
+  border-color: #d97706;
+  border-style: solid;
+  color: #92400e;
+}
+
+.overlay-button:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
+
+.overlay-button:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
 }
 
 .metric-button {
@@ -176,6 +225,21 @@
 .chart-axis text {
   fill: var(--muted);
   font-size: 0.78rem;
+}
+
+.chart-axis-right text {
+  fill: #d97706;
+  font-size: 0.78rem;
+}
+
+.chart-axis-right-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.chart-legend-text {
+  fill: var(--ink);
+  font-size: 0.8rem;
 }
 
 .chart-line {
@@ -239,12 +303,20 @@
     grid-template-columns: 1fr;
   }
 
+  .chart-controls-right {
+    align-items: flex-start;
+  }
+
   .metric-controls {
     justify-content: flex-start;
     max-width: none;
   }
 
+  .overlay-control {
+    justify-content: flex-start;
+  }
+
   .metric-button {
-    flex: 1 1 160px;
+    flex: 1 1 140px;
   }
 }

@@ -46,6 +46,10 @@
           <strong>Rest game</strong>
           <span>A missed game that reflects planned workload management rather than normal rotation.</span>
         </div>
+        <div>
+          <strong>Injury games</strong>
+          <span>Games missed by star-level players due to documented injuries, distinct from planned rest.</span>
+        </div>
       </div>
     </section>
 
@@ -77,10 +81,16 @@
               <p class="metric-note" data-load-description></p>
             </div>
 
-            <div class="metric-controls" role="tablist" aria-label="Load management metric">
-              <button class="metric-button is-active" type="button" data-load-metric="avgGamesPlayed">Availability</button>
-              <button class="metric-button" type="button" data-load-metric="avgMinutesPerGame">Nightly workload</button>
-              <button class="metric-button" type="button" data-load-metric="restGamesPerStar">Planned rest</button>
+            <div class="chart-controls-right">
+              <div class="metric-controls" role="tablist" aria-label="Load management metric">
+                <button class="metric-button is-active" type="button" data-load-metric="avgGamesPlayed">Availability</button>
+                <button class="metric-button" type="button" data-load-metric="avgMinutesPerGame">Nightly workload</button>
+                <button class="metric-button" type="button" data-load-metric="restGamesPerStar">Planned rest</button>
+                <button class="metric-button" type="button" data-load-metric="injuriesPerStar">Injuries</button>
+              </div>
+              <div class="overlay-control">
+                <button class="overlay-button" type="button" data-load-overlay aria-pressed="false">Overlay injuries</button>
+              </div>
             </div>
           </div>
 
