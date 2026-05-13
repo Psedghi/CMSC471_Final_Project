@@ -1,3 +1,60 @@
+/* ── Position intro ─────────────────────────────────────────────── */
+
+.ps-intro {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 0.85fr);
+  gap: 24px;
+  align-items: start;
+  margin-bottom: 24px;
+  padding: 22px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+}
+
+.ps-intro h2 {
+  margin-bottom: 8px;
+}
+
+.ps-intro p {
+  margin: 0;
+}
+
+.ps-term-list {
+  display: grid;
+  gap: 10px;
+}
+
+.ps-term-list div {
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fbfcfd;
+}
+
+.ps-term-list strong,
+.ps-term-list span {
+  display: block;
+}
+
+.ps-term-list strong {
+  margin-bottom: 3px;
+  font-size: 1rem;
+}
+
+.ps-term-list span {
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+@media (max-width: 760px) {
+  .ps-intro {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── Main layout ────────────────────────────────────────────────── */
+
 .ps-layout {
   grid-template-columns: 1fr;
 }

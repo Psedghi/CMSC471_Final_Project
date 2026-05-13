@@ -19,7 +19,30 @@
     <section class="viz-heading">
       <p class="eyebrow">Visualization 04</p>
       <h1>Player Size</h1>
-      <p>The average height at every position has barely budged over two decades — but the <em>mix</em> of positions has transformed dramatically. The NBA now fields far more guards and far fewer centers than it did in 2004-05.</p>
+      <p>Use the slider to scrub through 20 seasons and see how the height at each position has changed over time.</p>
+    </section>
+
+    <section class="ps-intro" aria-label="Position definitions">
+      <div>
+        <p class="eyebrow">Before the chart</p>
+        <h2>The three NBA positions</h2>
+        <p>NBA players are listed under one of three primary positions. Each dot in the chart below represents one player. The colored line in each column is the position average for that season.</p>
+      </div>
+
+      <div class="ps-term-list" aria-label="Position definitions">
+        <div>
+          <strong style="color: #2457d6">Guard (G)</strong>
+          <span>Typically the smallest and quickest players on the floor. Guards handle the ball, run the offense, and are the primary outside shooters.</span>
+        </div>
+        <div>
+          <strong style="color: #247a55">Forward (F)</strong>
+          <span>Mid-sized and versatile players who can score inside and outside. Forwards guard multiple positions and contribute across all areas of the game.</span>
+        </div>
+        <div>
+          <strong style="color: #c8452d">Center (C)</strong>
+          <span>Traditionally the tallest player on the team, stationed near the basket. Centers are responsible for rebounding, interior scoring, and rim protection.</span>
+        </div>
+      </div>
     </section>
 
     <section class="viz-layout ps-layout">
@@ -83,6 +106,10 @@
       </div>
     </section>
   </main>
+
+  <footer class="viz-credit">
+    Data: <a href="https://github.com/swar/nba_api" target="_blank" rel="noopener">NBA API</a> via nba_api &middot; NBA seasons 2004-05 through 2024-25
+  </footer>
 
   <script src="https://d3js.org/d3.v7.min.js"></script>
   <script src="../scripts/viz-page.js"></script>
