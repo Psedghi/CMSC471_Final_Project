@@ -1,10 +1,7 @@
 const chart = document.querySelector("[data-gs-chart]");
 const tooltip = document.querySelector("[data-chart-tooltip]");
-const story = document.querySelector("[data-gs-story]");
 const metricName = document.querySelector("[data-metric-name]");
-const metricReadout = document.querySelector("[data-metric-readout]");
 const driverList = document.querySelector("[data-driver-list]");
-const mvpList = document.querySelector("[data-mvp-list]");
 const metricButtons = Array.from(document.querySelectorAll("[data-metric]"));
 
 const metrics = {
@@ -15,8 +12,6 @@ const metrics = {
     unit: "players",
     color: "#c8452d",
     formatter: (v) => Math.round(v).toString(),
-    plain: "The total number of non-USA born players on NBA rosters each season.",
-    readout: "International presence has nearly doubled — from 77 players in 2004-05 to 133 in 2024-25, now roughly a third of all roster spots."
   },
   countries: {
     label: "Countries represented",
@@ -25,8 +20,6 @@ const metrics = {
     unit: "countries",
     color: "#2457d6",
     formatter: (v) => Math.round(v).toString(),
-    plain: "How many distinct countries have at least one active NBA player each season.",
-    readout: "From 35 countries in 2004-05 to a peak of 47 in 2021-22 — the NBA is genuinely a world league."
   }
 };
 
@@ -51,9 +44,7 @@ Promise.all([
   mvps = mvpRows.filter((d) => d.is_international);
   mvpSeasonSet = new Set(mvps.map((m) => m.SEASON));
 
-  renderStory();
   renderDrivers();
-  renderMvpList();
   renderChart("intl_players");
 }).catch((err) => {
   console.error("Failed to load data:", err);
@@ -72,24 +63,6 @@ function scaleLinear(domainMin, domainMax, rangeMin, rangeMax) {
   };
 }
 
-function renderStory() {
-  if (!story || data.length === 0) return;
-  const first = data[0];
-  const last = data[data.length - 1];
-  const peakCountries = Math.max(...data.map((d) => d.countries));
-
-  story.innerHTML = [
-    { label: "International players", value: `${first.intl_players} → ${last.intl_players}`, detail: `${first.SEASON} to ${last.SEASON}` },
-    { label: "Peak countries represented", value: `${peakCountries} nations`, detail: "in a single season" },
-    { label: "International MVPs", value: `${mvps.length} of ${data.length}`, detail: "seasons since 2004-05" }
-  ].map((item) => `
-    <div>
-      <span>${item.label}</span>
-      <strong>${item.value}</strong>
-      <small>${item.detail}</small>
-    </div>
-  `).join("");
-}
 
 function renderDrivers() {
   if (!driverList || data.length === 0) return;
@@ -122,20 +95,6 @@ function renderDrivers() {
   }).join("");
 }
 
-function renderMvpList() {
-  if (!mvpList) return;
-  if (mvps.length === 0) {
-    mvpList.innerHTML = `<p style="color:var(--muted);font-size:0.9rem">Run data/mvp_data.py to generate mvp_winners.csv.</p>`;
-    return;
-  }
-  mvpList.innerHTML = mvps.map((m) => `
-    <article class="mvp-entry">
-      <span>${m.SEASON}</span>
-      <strong>${m.player}</strong>
-      <p>${m.country}</p>
-    </article>
-  `).join("");
-}
 
 function renderChart(metricKey) {
   if (!chart || data.length === 0) return;
@@ -259,15 +218,6 @@ function renderChart(metricKey) {
   chart.appendChild(points);
 
   if (metricName) metricName.textContent = metric.label;
-  if (metricReadout) {
-    const first = data[0];
-    const last = data[data.length - 1];
-    metricReadout.innerHTML = `
-      <strong>${metric.plain}</strong>
-      <span>${metric.readout}</span>
-      <em>${first.SEASON}: ${metric.formatter(first[metricKey])}. ${last.SEASON}: ${metric.formatter(last[metricKey])}.</em>
-    `;
-  }
 }
 
 function showTooltip(event, row) {

@@ -19,20 +19,22 @@
     <section class="viz-heading">
       <p class="eyebrow">Visualization 05</p>
       <h1>Global Superstars</h1>
-      <p>The NBA has become a world league. International players hold more than a third of all roster spots — and have dominated the MVP award for seven straight seasons.</p>
+      <p>The NBA MVP (Most Valuable Player) is voted on each season by sports writers and broadcasters. It goes to the player considered the best in the league that year. In the early 2000s, nearly every MVP winner was born in the USA. That has changed a lot. Explore how many players from outside the United States have joined the NBA since 2004, and see which seasons had an international MVP winner.</p>
     </section>
 
     <section class="viz-layout gs-layout">
       <div class="viz-stage gs-stage">
 
-        <div class="gs-story" data-gs-story></div>
+        <div class="gs-facts">
+          <p class="gs-context-note">The NBA has 30 teams with 15 roster spots each, about 450 players total. International players have gone from roughly 1 in 6 (17%) to nearly 1 in 3 (30%) of all players.</p>
+          <p class="gs-context-note">The last 7 MVP awards have all gone to international players, the longest streak in league history.</p>
+        </div>
 
         <section class="chart-panel" aria-label="Interactive international players chart">
           <div class="chart-toolbar">
             <div>
               <p class="eyebrow">Explore the trend</p>
               <h2 data-metric-name>International players in the NBA</h2>
-              <p class="metric-readout" data-metric-readout></p>
             </div>
 
             <div class="metric-controls" role="tablist" aria-label="International players metric">
@@ -63,17 +65,15 @@
             <h2>How much has international presence changed?</h2>
             <div class="driver-list" data-driver-list></div>
           </div>
-
-          <div>
-            <p class="eyebrow">International MVPs</p>
-            <h2>The award follows the talent</h2>
-            <div class="mvp-list" data-mvp-list></div>
-          </div>
         </section>
 
       </div>
     </section>
   </main>
+
+  <footer class="viz-credit">
+    Data: <a href="https://github.com/swar/nba_api" target="_blank" rel="noopener">NBA API</a> via nba_api &middot; NBA seasons 2004-05 through 2024-25
+  </footer>
 
   <script src="https://d3js.org/d3.v7.min.js"></script>
   <script src="../scripts/viz-page.js"></script>
