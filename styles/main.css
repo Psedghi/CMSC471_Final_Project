@@ -219,6 +219,19 @@ h2 {
   border-bottom: 0;
 }
 
+.viz-credit {
+  width: min(1120px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 20px 0 40px;
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+.viz-credit a {
+  color: var(--muted);
+  text-decoration: underline;
+}
+
 @media (max-width: 760px) {
   .home-shell,
   .viz-shell {
