@@ -20,6 +20,7 @@ Fans often debate how basketball has changed over the years. Instead of just wat
 
 - [**NBA API**](https://github.com/swar/nba_api): Main source for official league data, shot charts, player bio stats, and roster information.
 - [**Basketball Reference**](https://www.basketball-reference.com/): Backup source for historical stats and cross-referencing.
+- [**DomSamangy**](https://github.com/DomSamangy/NBA_Shots_04_25): Data for each x/y point from where every shot was taken from 2003-2004 
 
 ## Running the Project
 
