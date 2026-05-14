@@ -1,7 +1,7 @@
 # Evolution of Basketball
 
 **Final Project — Group 20**  
-**Team Members:** Arjun Shah, Parsa Sedghi, Elizabeth Ipe, Archit Shankar
+**Team Members:** Arjun Shah, Parsa Sedghi, Elizabeth Ipe, Archit Shankar, Abubakr Hussien
 
 ## Project Overview
 
@@ -87,10 +87,10 @@ python3 data/higher_scoring.py
 
 ## Work Breakdown
 
-| Team Member   | Contributions |
-|---------------|---------------|
-| Parsa Sedghi  | Player Size visualization (data pipeline, D3 dot strip plot, HTML/CSS); Global Superstars visualization (data pipeline, line chart, MVP list, HTML/CSS) |
-| Arjun Shah    | Shooting Centers visualization (data pipeline, D3 line chart, top-5 table, HTML/CSS)|
-| Elizabeth Ipe | *(add your contributions here)* |
-| Archit Shankar | *(add your contributions here)* |
-| Abubakr Hussien | *(add your contributions here)* |
+| Team Member     | Contributions |
+|-----------------|---------------|
+| Parsa Sedghi    | Player Size visualization (data pipeline, D3 dot strip plot, HTML/CSS); Global Superstars visualization (data pipeline, line chart, MVP list, HTML/CSS) |
+| Arjun Shah      | Shooting Centers visualization (data pipeline, D3 line chart, top-5 table, HTML/CSS); injuries metric and overlay toggle for Load Management; "Before the chart" explanatory section for Shooting Centers |
+| Elizabeth Ipe   | Load Management visualization (rough visual, HTML/CSS); axis labels and additional detail for Shooting Centers |
+| Archit Shankar  | Higher Scoring visualization (data pipeline, D3 chart, HTML/CSS); baseline site structure (index, shared styles, visualization scaffolding); load management clarifications |
+| Abubakr Hussien | 3-Point Boom heatmap (D3 court visualization, shot frequency binning, data pipeline); play button and slider animation for 3-Point Boom; "How to read" section for heatmap |
