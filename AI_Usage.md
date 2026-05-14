@@ -91,3 +91,10 @@ print("Done!")
 ## Court Visualization
 
 Cursor was used to draw the NBA half-court SVG in `js/heatmap.js` (`buildCourt()` function).
+
+
+## Load Management
+
+### Load Management Visualization
+
+Cursor was used to implement a D3-based load management visualization following the structure and conventions of existing visuals in the repository. This included updating the HTML, writing the chart and interaction logic in JavaScript, and adding a dedicated stylesheet.
