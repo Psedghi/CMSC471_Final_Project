@@ -147,3 +147,31 @@ Claude helped debug an issue where the top-5 table was not rendering for all thr
 > "My D3 table filter using `d.SEASON === '2016-17'` is returning no rows even though I can see the data in the console. The CSV has the season column as `SEASON` and the values look like `2016-17`. What could cause the filter to fail and how do I fix it?"
 
 Claude identified that the CSV was being parsed with leading/trailing whitespace in the season strings and suggested using `.trim()` when loading the data.
+
+---
+
+## Project Structure and Visualization Polish
+
+OpenAI Codex was used to help scaffold the shared project structure and refine two visualization pages for clarity and presentation quality.
+
+### Baseline Structure
+
+Codex was used to create the initial static site structure, including the main `index.html`, individual visualization HTML files, shared styling, and one JavaScript file per visualization.
+
+### Higher Scoring
+
+Codex was used to help build and polish the Higher Scoring visualization. This included:
+- Creating `data/higher_scoring.py` to pull NBA API team scoring data
+- Generating `data/higher_scoring_season_summary.csv`
+- Building the interactive chart in `scripts/higher-scoring.js`
+- Adding explanatory text for viewers who may not know basketball terms like possessions, 3PA, pace, and true shooting
+- Separating page-specific styling into `styles/higher-scoring.css`
+
+### Load Management
+
+Codex was used to improve the Load Management visualization and make it more submission-ready. This included:
+- Rewriting the chart logic in `scripts/load-management.js`
+- Removing the external D3 dependency for this page
+- Adding a plain-language introduction and glossary for non-basketball viewers
+- Adding summary cards, chart explanations, and caveats about interpreting rest-game data
+- Updating page-specific styling in `styles/load-management.css`
