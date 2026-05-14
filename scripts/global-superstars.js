@@ -75,11 +75,9 @@ function renderDrivers() {
   ];
 
   driverList.innerHTML = rows.map((row) => {
-    const high = Math.max(row.firstVal, row.lastVal);
-    const low = Math.min(row.firstVal, row.lastVal);
-    const range = Math.max(high - low, high * 0.05);
-    const startWidth = 38 + ((row.firstVal - low) / range) * 52;
-    const endWidth = 38 + ((row.lastVal - low) / range) * 52;
+    const maxVal = Math.max(row.firstVal, row.lastVal);
+    const startWidth = Math.round((row.firstVal / maxVal) * 88) + 4;
+    const endWidth = Math.round((row.lastVal / maxVal) * 88) + 4;
     return `
       <article class="driver-row">
         <div>

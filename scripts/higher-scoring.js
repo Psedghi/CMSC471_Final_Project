@@ -148,11 +148,9 @@ function renderDrivers() {
       const metric = metrics[key];
       const start = Number(first[key]);
       const end = Number(last[key]);
-      const high = Math.max(start, end);
-      const low = Math.min(start, end);
-      const range = Math.max(high - low, high * 0.04);
-      const startWidth = 38 + ((start - low) / range) * 52;
-      const endWidth = 38 + ((end - low) / range) * 52;
+      const maxVal = Math.max(start, end);
+      const startWidth = Math.round((start / maxVal) * 88) + 4;
+      const endWidth = Math.round((end / maxVal) * 88) + 4;
 
       return `
         <article class="driver-row">
