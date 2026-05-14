@@ -93,3 +93,4 @@ python3 data/higher_scoring.py
 | Arjun Shah    | Shooting Centers visualization (data pipeline, D3 line chart, top-5 table, HTML/CSS)|
 | Elizabeth Ipe | *(add your contributions here)* |
 | Archit Shankar | *(add your contributions here)* |
+| Abubakr Hussien | *(add your contributions here)* |

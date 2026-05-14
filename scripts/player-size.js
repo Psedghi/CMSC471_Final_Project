@@ -8,8 +8,8 @@ const MARGIN = { top: 20, right: 30, bottom: 66, left: 78 };
 const PLOT_W = SVG_W - MARGIN.left - MARGIN.right;
 const PLOT_H = SVG_H - MARGIN.top  - MARGIN.bottom;
 
-const H_MIN = 68;   // 5'8"
-const H_MAX = 90;   // 7'6"
+const H_MIN = 65;   // 5'5"
+const H_MAX = 92;   // 7'7"
 
 const COL_W      = PLOT_W / POSITIONS.length;
 const JITTER_W   = COL_W * 0.72;
@@ -132,7 +132,7 @@ function buildScaffold() {
 function update(season) {
   document.querySelector(".season-label").textContent = season;
 
-  const players = allData[season] || [];
+  const players = (allData[season] || []).filter(p => p.height >= H_MIN && p.height <= H_MAX);
 
   // Stat cards
   POSITIONS.forEach((pos) => {

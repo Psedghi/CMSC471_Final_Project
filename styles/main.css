@@ -219,6 +219,12 @@ h2 {
   border-bottom: 0;
 }
 
+.team-names {
+  margin: 10px 0 0;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
 .viz-credit {
   width: min(1120px, calc(100% - 32px));
   margin: 0 auto;
