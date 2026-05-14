@@ -150,6 +150,53 @@ Claude identified that the CSV was being parsed with leading/trailing whitespace
 
 ---
 
+## Global Superstars
+
+### Data Collection
+
+Claude Code was used to write two data scripts for this visualization.
+
+`data/global_superstars.py` pulls international player counts and countries represented per season from the `nba_api` library across 21 seasons (2004-05 through 2024-25), outputting `data/international_season_summary.csv`.
+
+`data/mvp_data.py` fetches all historical NBA players from the `nba_api` PlayerIndex endpoint to build a country lookup map, then matches it against a hardcoded list of MVP winners (2004-05 through 2024-25) to find which winners were born outside the USA. Output: `data/mvp_winners.csv`.
+
+**Output files generated:**
+- `data/international_season_summary.csv` — international player count and countries represented per season
+- `data/mvp_winners.csv` — MVP winner name, country, and international flag per season
+
+### Visualization Logic
+
+The outline and design for `scripts/global-superstars.js` came from our labs outline with the concepts from CMSC471. Claude implemented the outline into working code, including the D3 line chart, gold diamond markers on MVP seasons, animated tooltips, and the metric toggle between player count and countries represented.
+
+### HTML and CSS
+
+The page structure and layout for `visualizations/global-superstars.html` and `styles/global-superstars.css` were enhanced by Claude from the foundation we built in class, applying shared design conventions from the rest of the project.
+
+---
+
+## Player Size
+
+### Data Collection
+
+Claude was used to write `data/player_size.py`, which fetches player heights and games played per season from the `nba_api` `LeagueDashPlayerBioStats` endpoint, and position data from the `PlayerIndex` endpoint. Players with fewer than 20 games played are excluded. Output: `data/player_size.json`.
+
+**Output file generated:**
+- `data/player_size.json` — per-player height, position, and games played keyed by season (2004-05 through 2024-25)
+
+### Debugging
+
+Claude helped debug an issue where zero players were being mapped to positions. The `nba_api` `PlayerIndex` endpoint returns abbreviated position codes (`"G"`, `"F"`, `"C"`, `"F-G"`) rather than full words, but the original parsing logic checked for full English strings. Claude found the mismatch and rewrote the `primary_position()` function to split on `"-"` and read the first character.
+
+### Visualization Logic
+
+The outline and design for `scripts/player-size.js` came from our own class-based lab work. Claude implemented the outline into working code, including the D3 data join keyed on player ID, animated average lines per position, and the season slider with smooth enter/update/exit transitions.
+
+### HTML and CSS
+
+The page structure and layout for `visualizations/player-size.html` and `styles/player-size.css` were enhanced by Claude from the foundation we built in class, applying shared design conventions from the rest of the project.
+
+---
+
 ## Project Structure and Visualization Polish
 
 OpenAI Codex was used to help scaffold the shared project structure and refine two visualization pages for clarity and presentation quality.
