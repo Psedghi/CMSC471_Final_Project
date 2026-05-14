@@ -110,6 +110,12 @@ h2 {
   text-transform: uppercase;
 }
 
+.chart-disclaimer {
+  margin: -4px 0 10px;
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+
 .viz-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
