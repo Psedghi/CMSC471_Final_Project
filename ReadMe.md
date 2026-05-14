@@ -90,6 +90,6 @@ python3 data/higher_scoring.py
 | Team Member   | Contributions |
 |---------------|---------------|
 | Parsa Sedghi  | Player Size visualization (data pipeline, D3 dot strip plot, HTML/CSS); Global Superstars visualization (data pipeline, line chart, MVP list, HTML/CSS) |
-| Arjun Shah    | *(add your contributions here)* |
+| Arjun Shah    | Shooting Centers visualization (data pipeline, D3 line chart, top-5 table, HTML/CSS)|
 | Elizabeth Ipe | *(add your contributions here)* |
 | Archit Shankar | *(add your contributions here)* |
